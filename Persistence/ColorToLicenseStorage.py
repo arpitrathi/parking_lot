@@ -1,3 +1,7 @@
+"""
+It involves dealing with storage of license plate to car number along with it's
+removal and getting all the cars for a particular color.
+"""
 from collections import defaultdict
 
 
@@ -46,7 +50,7 @@ class ColorStorage(object):
                 self.colorToLicenseStorage[colorToSmall]:
             return False
         self.colorToLicenseStorage[colorToSmall].remove(licenseNumber)
-        if len(self.colorToLicenseStorage[colorToSmall]) == 0:
+        if not self.colorToLicenseStorage[colorToSmall]:
             del self.colorToLicenseStorage[colorToSmall]
         return True
 
@@ -66,4 +70,3 @@ class ColorStorage(object):
         if colorToSmall in self.colorToLicenseStorage:
             ans = list(self.colorToLicenseStorage[colorToSmall])
         return ans
-
