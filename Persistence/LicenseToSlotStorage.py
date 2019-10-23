@@ -4,6 +4,7 @@ number mapping.
 """
 import traceback
 
+
 class LicenseStorage(object):
     """
     This module maps a licence plate to a parking slot and reverses it.
