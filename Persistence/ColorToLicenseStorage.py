@@ -3,6 +3,7 @@ It involves dealing with storage of license plate to car number along with it's
 removal and getting all the cars for a particular color.
 """
 from collections import defaultdict
+from collections import OrderedDict
 
 
 class ColorStorage(object):
@@ -10,7 +11,7 @@ class ColorStorage(object):
     Storage module to store mapping of car color with all the corresponding license plates.
     """
     def __init__(self):
-        self.colorToLicenseStorage = defaultdict(set)
+        self.colorToLicenseStorage = defaultdict(OrderedDict)
 
     def addLicenseToColor(self, color, licenseNumber):
         """
@@ -27,9 +28,9 @@ class ColorStorage(object):
 
         colorToSmall = color.lower()
         if colorToSmall not in self.colorToLicenseStorage:
-            self.colorToLicenseStorage[colorToSmall] = set([licenseNumber])
+            self.colorToLicenseStorage[colorToSmall] = [licenseNumber]
         else:
-            self.colorToLicenseStorage[colorToSmall].update([licenseNumber])
+            self.colorToLicenseStorage[colorToSmall].append(licenseNumber)
 
     def removeLicenseFromColor(self, color, licenseNumber):
         """
@@ -68,7 +69,7 @@ class ColorStorage(object):
         colorToSmall = color.lower()
         ans = []
         if colorToSmall in self.colorToLicenseStorage:
-            ans = list(self.colorToLicenseStorage[colorToSmall])
+            ans = self.colorToLicenseStorage[colorToSmall]
         return ans
 
     def getAllCars(self, color):

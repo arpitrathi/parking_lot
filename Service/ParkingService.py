@@ -15,16 +15,16 @@ class ParkingService(object):
 
     def createParkingLot(self, n):
         self.noOfParkingSlots = n
-        self.minHeap = [range(1, n+1)]
+        self.minHeap = range(1, n+1)
         heapq.heapify(self.minHeap)
         return True
 
-    def parkVehicle(self, licenseNumber, color):
+    def parkVehicle(self, licenseNumber, carColor):
         if len(self.minHeap) == 0:
             return 0
         parkingSlot = heapq.heappop(self.minHeap)
-        carDetails = Car(licenseNumber, color)
-        self.colorToLicenseStorage.addLicenseToColor(color, licenseNumber)
+        carDetails = Car(licenseNumber, carColor)
+        self.colorToLicenseStorage.addLicenseToColor(carColor, licenseNumber)
         self.licenseToSlotStorage.addLicenseToStorage(licenseNumber, parkingSlot)
         self.slotStorage.addCarToTheSlot(parkingSlot, carDetails)
         return parkingSlot
@@ -33,24 +33,27 @@ class ParkingService(object):
         if slotNumber<1 or slotNumber > self.noOfParkingSlots:
             return False
         carDetails = self.slotStorage.getCarDetail(slotNumber)
+        if carDetails is None:
+            return False
         self.slotStorage.removeCarFromSlot(slotNumber)
-        assert self.licenseToSlotStorage.removeLicenseFromStorage( \
-                carDetails.licenseNumber), "License number not found in map"
-        assert self.colorToLicenseStorage.removeLicenseFromColor(\
-                carDetails.color, carDetails.licenseNumber), "License number not found in color set"
+        self.licenseToSlotStorage.removeLicenseFromStorage( \
+                carDetails.licenseNumber)
+        self.colorToLicenseStorage.removeLicenseFromColor(\
+                carDetails.carColor, carDetails.licenseNumber)
+        heapq.heappush(self.minHeap, slotNumber)
         return True
 
     def statusOfParkingSlot(self):
         return self.slotStorage.showCarDetails()
 
-    def getLicenseNumbersOfCarForGivenColor(self, color):
-        return self.colorToLicenseStorage.getAllCars(color)
+    def getLicenseNumbersOfCarForGivenColor(self, carColor):
+        return self.colorToLicenseStorage.getAllCars(carColor)
 
     def getSlotNumberForGivenLicense(self, licenseNumber):
         return self.licenseToSlotStorage.getSlotNumberForLicenseFromStorage(licenseNumber)
 
-    def getSlotNumbersOfCarForGivenColor(self, color):
-        listOfCars = self.colorToLicenseStorage.getListOfAllCars(color)
+    def getSlotNumbersOfCarForGivenColor(self, carColor):
+        listOfCars = self.colorToLicenseStorage.getListOfAllCars(carColor)
         slotNumbers = []
         for carLicense in listOfCars:
             slotNumbers.append(str(self.getSlotNumberForGivenLicense(carLicense)))

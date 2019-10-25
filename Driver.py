@@ -20,18 +20,17 @@ class Driver(object):
             except Exception:
                 traceback.print_exc()
 
-
-    @classmethod
-    def run(cls):
+    def run(self):
         if len(sys.argv) > 1:
             fileName = sys.argv[1]
-            cls.processFile(fileName)
+            self.processFile(fileName)
         else:
-            cls.processCommandLineArguments()
+            self.processCommandLineArguments()
 
 
 def main():
-    Driver.run()
+    driver = Driver()
+    driver.run()
 
 
 if __name__ == '__main__':

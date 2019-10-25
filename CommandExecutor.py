@@ -23,7 +23,7 @@ class CommandExecutor(object):
                 if self.parkingService.leaveParkingSlot(int(commands[1])):
                     print("Slot number %s is free" % commands[1])
                 else:
-                    print("No such slot number found")
+                    print("Slot number %s is already free" % commands[1])
             except AssertionError:
                 traceback.print_exc()
         elif commands[0] == "status":

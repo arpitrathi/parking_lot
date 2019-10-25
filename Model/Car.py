@@ -11,14 +11,14 @@ class Car(object):
     Creates a car object
     """
 
-    def __init__(self, licenseNumber, carModel):
+    def __init__(self, licenseNumber, carColor):
         """
         :param licenseNumber: str
-        :param carModel: str
+        :param carColor: str
         """
         self.id = IdGenerator.generateUniqueId()
         self.licenseNumber = licenseNumber
-        self.carModel = carModel.lower()
+        self.carColor = carColor.lower()
 
     def getCarLicenseNumber(self):
         """
@@ -34,8 +34,8 @@ class Car(object):
         :return: str
         Returns the car model
         """
-        return self.carModel
+        return self.carColor
 
     def showCarDetail(self):
-        carTuple = (self.licenseNumber, self.carModel)
+        carTuple = (self.licenseNumber, self.carColor)
         return carTuple
