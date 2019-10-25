@@ -70,3 +70,8 @@ class ColorStorage(object):
         if colorToSmall in self.colorToLicenseStorage:
             ans = list(self.colorToLicenseStorage[colorToSmall])
         return ans
+
+    def getAllCars(self, color):
+        ansList = self.getListOfAllCars(color)
+        formatStr = ', '.join(ansList)
+        return formatStr

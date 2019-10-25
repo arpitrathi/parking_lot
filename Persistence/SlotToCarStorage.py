@@ -8,8 +8,12 @@ class SlotToCarStorage(object):
     def removeCarFromSlot(self, slotNumber):
         if slotNumber not in self.slotStorage:
             return None
-        carDetails = self.slotStorage[slotNumber]
-        return carDetails
+        del self.slotStorage[slotNumber]
+
+    def getCarDetail(self, slotNumber):
+        if slotNumber not in self.slotStorage:
+            return None
+        return self.slotStorage[slotNumber]
 
     def showCarDetailForGivenSlot(self, slotNumber):
         formatStr = ""
@@ -23,6 +27,10 @@ class SlotToCarStorage(object):
     def showCarDetails(self):
         initStr = "Slot No.\tRegistration No\tColour\n"
         print initStr
+        carStr = ""
         for slotNumber in sorted(self.slotStorage.keys()):
-            carStr = self.showCarDetailForGivenSlot(slotNumber)
-            print carStr
+            carStr += self.showCarDetailForGivenSlot(slotNumber)
+        formatStr = ""
+        if len(carStr)  > 0:
+            formatStr = initStr + carStr
+        return formatStr
