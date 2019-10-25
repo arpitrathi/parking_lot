@@ -3,7 +3,7 @@ Model for a car which will store initially license number and car color.
 This model can be extended later if we need to add more attributes specific
 to car.
 """
-from Model.Library import IdGenerator
+from Common.Library import IdGenerator
 
 
 class Car(object):
@@ -37,5 +37,5 @@ class Car(object):
         return self.carModel
 
     def showCarDetail(self):
-        formatStr = "%s\t%s\n" % (self.licenseNumber, self.carModel)
-        return formatStr
+        carTuple = (self.licenseNumber, self.carModel)
+        return carTuple

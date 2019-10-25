@@ -5,7 +5,7 @@ from Persistence.SlotToCarStorage import SlotToCarStorage
 import heapq
 
 
-class CarService(object):
+class ParkingService(object):
     def __init__(self):
         self.slotStorage = SlotToCarStorage()
         self.noOfParkingSlots = 0

@@ -1,6 +1,7 @@
 class SlotToCarStorage(object):
     def __init__(self):
         self.slotStorage = dict()
+        self.printFormat = "%-10s%-20s%-6s\n"
 
     def addCarToTheSlot(self, slotNumber, carDetails):
         self.slotStorage[slotNumber] = carDetails
@@ -19,18 +20,17 @@ class SlotToCarStorage(object):
         formatStr = ""
         if slotNumber not in self.slotStorage:
             return formatStr
-        carDetail = self.slotStorage[slotNumber]
-        formatStr += "%d\t" % slotNumber
-        formatStr += carDetail.showCarDetail()
+        carDetail = self.slotStorage[slotNumber].showCarDetail()
+        formatStr = self.printFormat % (str(slotNumber), carDetail[0], carDetail[1])
         return formatStr
 
     def showCarDetails(self):
-        initStr = "Slot No.\tRegistration No\tColour\n"
+        initStr = self.printFormat % ("Slot No.", "Registration No", "Colour")
         print initStr
         carStr = ""
         for slotNumber in sorted(self.slotStorage.keys()):
             carStr += self.showCarDetailForGivenSlot(slotNumber)
-        formatStr = ""
-        if len(carStr)  > 0:
+        formatStr = initStr
+        if len(carStr) > 0:
             formatStr = initStr + carStr
         return formatStr
