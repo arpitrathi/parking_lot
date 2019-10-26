@@ -12,6 +12,8 @@ class CommandExecutor(object):
         if commands[0] == "create_parking_lot":
             if self.parkingService.createParkingLot(int(commands[1])):
                 print("Created a parking lot with %s slots" % commands[1])
+            else:
+                print("Failed to create a parking lot")
         elif commands[0] == "park":
             slotNumber = self.parkingService.parkVehicle(commands[1], commands[2])
             if slotNumber == 0:
@@ -28,7 +30,7 @@ class CommandExecutor(object):
                 traceback.print_exc()
         elif commands[0] == "status":
             formatStr = self.parkingService.statusOfParkingSlot()
-            print(r"%s" % formatStr)
+            print("%s" % formatStr)
         elif commands[0] == "registration_numbers_for_cars_with_colour":
             ansStr = self.parkingService.getLicenseNumbersOfCarForGivenColor(commands[1])
             if len(ansStr) == 0:
@@ -49,4 +51,6 @@ class CommandExecutor(object):
                 print(ans)
         elif commands[0] == "exit":
             sys.exit(0)
+        else:
+            assert False
 

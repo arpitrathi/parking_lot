@@ -105,4 +105,8 @@ EOTXT
     expect(fetch_stdout(pty)).to end_with("No cars found in the parking lot with colour Red\n")
   end
 
+  it "can handle invalid commands as well" do
+    run_command(pty, "invalid command\n")
+    expect(fetch_stdout(pty)).to end_with("Please input valid commands\n")
+  end
 end

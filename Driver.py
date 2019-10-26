@@ -12,8 +12,9 @@ class Driver(object):
         for commandStr in fileContents.readlines():
             try:
                 self.commandExecutor.executeCommand(commandStr)
+            except AssertionError:
+                print("Please input valid commands")
             except Exception:
-                print("Command Tried: %s" % commandStr)
                 traceback.print_exc()
 
     def processCommandLineArguments(self):
@@ -21,6 +22,8 @@ class Driver(object):
             try:
                 commandStr = raw_input()
                 self.commandExecutor.executeCommand(commandStr)
+            except AssertionError:
+                print("Please input valid commands")
             except Exception:
                 traceback.print_exc()
 
