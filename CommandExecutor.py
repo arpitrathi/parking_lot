@@ -23,7 +23,7 @@ class CommandExecutor(object):
                 if self.parkingService.leaveParkingSlot(int(commands[1])):
                     print("Slot number %s is free" % commands[1])
                 else:
-                    print("Slot number %s is already free" % commands[1])
+                    print("Slot number %s is already free or not present yet" % commands[1])
             except AssertionError:
                 traceback.print_exc()
         elif commands[0] == "status":
@@ -32,13 +32,13 @@ class CommandExecutor(object):
         elif commands[0] == "registration_numbers_for_cars_with_colour":
             ansStr = self.parkingService.getLicenseNumbersOfCarForGivenColor(commands[1])
             if len(ansStr) == 0:
-                print("Not found")
+                print("No cars found in the parking lot with colour %s" % commands[1])
             else:
                 print(ansStr)
         elif commands[0] == "slot_numbers_for_cars_with_colour":
             ansStr = self.parkingService.getSlotNumbersOfCarForGivenColor(commands[1])
             if len(ansStr) == 0:
-                print("Not found")
+                print("No cars found in the parking lot with colour %s" % commands[1])
             else:
                 print(ansStr)
         elif commands[0] == "slot_number_for_registration_number":

@@ -27,7 +27,6 @@ class SlotToCarStorage(object):
 
     def showCarDetails(self):
         colorLen = len("Colour")
-
         headerFormat = self.printFormat + "%-"+str(colorLen)+"s"
         initStr = headerFormat % ("Slot No.", "Registration No", "Colour")
         carStr = ""
@@ -35,7 +34,7 @@ class SlotToCarStorage(object):
         for slotNumber in sorted(self.slotStorage.keys()):
             carsFound = True
             carStr += "\n" + self.showCarDetailForGivenSlot(slotNumber)
-        formatStr = initStr
+        formatStr = "No cars present in the parking lot"
         if carsFound:
             formatStr = initStr + carStr
 
