@@ -28,7 +28,7 @@ class CommandExecutor(object):
                 traceback.print_exc()
         elif commands[0] == "status":
             formatStr = self.parkingService.statusOfParkingSlot()
-            print(formatStr)
+            print(r"%s" % formatStr)
         elif commands[0] == "registration_numbers_for_cars_with_colour":
             ansStr = self.parkingService.getLicenseNumbersOfCarForGivenColor(commands[1])
             if len(ansStr) == 0:

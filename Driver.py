@@ -8,9 +8,13 @@ class Driver(object):
         self.commandExecutor = CommandExecutor()
 
     def processFile(self, fileName):
-        #print(self)
-        print(fileName)
-        pass
+        fileContents = open(fileName, "r")
+        for commandStr in fileContents.readlines():
+            try:
+                self.commandExecutor.executeCommand(commandStr)
+            except Exception:
+                print("Command Tried: %s" % commandStr)
+                traceback.print_exc()
 
     def processCommandLineArguments(self):
         while True:
